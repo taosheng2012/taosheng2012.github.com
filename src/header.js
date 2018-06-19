@@ -27,7 +27,7 @@ export default class Header extends React.Component {
                     <Dropdown overlay={menu} placement="bottomRight">
                         <a>
                             <Icon type="user" />
-                            &nbsp; John &nbsp;
+                            {" John "}
                             <Icon type="down" />
                         </a>
                     </Dropdown>

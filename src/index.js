@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import "./index.css";
 
 import Nav from "./nav";
-import Contents from "./contents";
 import Header from "./header";
 import Footer from "./footer";
+
+import Home from "./pages/home";
+import NotFound from "./pages/not-found";
 
 ReactDOM.render(
     <BrowserRouter>
@@ -19,7 +21,12 @@ ReactDOM.render(
 
             <div className="app-right">
                 <Header />
-                <Contents />
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/home" component={Home} />
+
+                    <Route component={NotFound} />
+                </Switch>
             </div>
         </div>
     </BrowserRouter>,

@@ -62,6 +62,7 @@ export default class Home extends React.Component {
                         })}
                     </Row>
                 </Card>
+                
                 <LineReact data={lineData.line} />
             </div>
         );

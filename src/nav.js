@@ -5,7 +5,7 @@ import { Menu, Icon } from "antd";
 
 const { SubMenu, Item } = Menu;
 
-export default class NavBar extends React.Component {
+export default class Nav extends React.Component {
     render() {
         return (
             <nav>
@@ -17,7 +17,7 @@ export default class NavBar extends React.Component {
                     style={{ display: "block", margin: "3px auto" }}
                 />
 
-                <Menu>
+                <Menu style={{borderRight: "none"}}>
                     <Item>
                         <Link to="/home">
                             <Icon type="home" />Home
