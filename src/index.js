@@ -11,6 +11,8 @@ import Footer from "./footer";
 import Home from "./pages/home";
 import NotFound from "./pages/not-found";
 
+import Employees from "./pages/employees"
+
 ReactDOM.render(
     <BrowserRouter>
         <div className="app">
@@ -24,6 +26,7 @@ ReactDOM.render(
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/home" component={Home} />
+                    <Route path="/employees" component={Employees} />
 
                     <Route component={NotFound} />
                 </Switch>

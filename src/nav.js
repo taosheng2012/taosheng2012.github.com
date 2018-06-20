@@ -27,32 +27,32 @@ export default class Nav extends React.Component {
                     <SubMenu
                         title={
                             <span>
-                                <Icon type="line-chart" />Business
+                                <Icon type="line-chart" />Products
                             </span>
                         }
                     >
                         <Item>
-                            <Link to="/business/apple">
-                                <Icon type="apple" />Apple
+                            <Link to="/products/ios">
+                                <Icon type="apple" />iOS
                             </Link>
                         </Item>
 
                         <Item>
-                            <Link to="/business/android">
+                            <Link to="/products/android">
                                 <Icon type="android" />Android
                             </Link>
                         </Item>
 
                         <Item>
-                            <Link to="/business/web">
+                            <Link to="/products/web">
                                 <Icon type="chrome" />Web
                             </Link>
                         </Item>
                     </SubMenu>
 
                     <Item>
-                        <Link to="/user">
-                            <Icon type="user" />User
+                        <Link to="/employees">
+                            <Icon type="user" />Employees
                         </Link>
                     </Item>
 

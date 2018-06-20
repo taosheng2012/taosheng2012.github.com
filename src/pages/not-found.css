@@ -1,0 +1,12 @@
+.not-found {
+    padding: 2%;
+}
+
+.not-found > p {
+    color: green;
+    font-size: 20px;
+    padding: 10px 0px;
+    margin: 0px;
+    border: 1px solid green;
+    text-align: center;
+}
