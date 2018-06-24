@@ -13,6 +13,10 @@ import NotFound from "./pages/not-found";
 
 import Employees from "./pages/employees"
 
+
+import "./mock"
+
+
 ReactDOM.render(
     <BrowserRouter>
         <div className="app">

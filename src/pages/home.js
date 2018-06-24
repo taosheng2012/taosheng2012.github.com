@@ -3,22 +3,9 @@ import React from "react";
 import { Card, Row, Col } from "antd";
 import "antd/dist/antd.css";
 
-import Mock from "mockjs"
-import $ from "jquery"
-
 import "./home.css";
 
 import Chart from "../components/chart.js";
-
-Mock.mock("getJSON",{
-    name: "hello",
-    "gender|1": ["Male", "Female"],
-    age: "@integer(22,35)",
-    email: "@email"
-
-})
-
-$.ajax({url: "getJSON"}).done((res)=>console.log(res))
 
 const style_card = {
     backgroundColor: "#ecf6fd"
