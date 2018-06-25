@@ -6,6 +6,6 @@ mock.mock("getChartData", {
         name: "@name",
         age: "@integer(20,50)",
         "gender|1": ["Male", "Female"],
-        "education|1": ["本一", "本二", "本三", "大专", "中专", "高中及以下"]
+        "education|1": ["211", "985", "本科", "大专", "中专", "高中及以下"]
     }]
 });
