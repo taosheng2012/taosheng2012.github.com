@@ -29,7 +29,7 @@ export default class Employees extends React.Component {
         };
     }
     componentDidMount() {
-        axios.get("getChartData").then(res => {
+        axios.get("getTableData").then(res => {
             this.setState({ dataSource: res.data.dataSource });
             console.log(res)
         });

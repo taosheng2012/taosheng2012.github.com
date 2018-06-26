@@ -1,5 +1,7 @@
 import React from "react";
 
+import Axios from "axios"
+
 import Echarts from "echarts/lib/echarts";
 
 import "echarts/lib/chart/line";
@@ -9,7 +11,6 @@ import "echarts/lib/component/title";
 import "echarts/lib/component/grid";
 import "echarts/lib/component/tooltip";
 import "echarts/lib/component/legend";
-
 
 const series_data = [
     {
@@ -40,12 +41,11 @@ const series_data = [
             ["Jul", 44]
         ]
     }
-
 ];
 
 export default class ChartLine extends React.Component {
     componentDidMount() {
-        Echarts.init(this.refs.container).setOption({
+        const option = {
             title: {
                 text: "月度销售数据汇总（2018年）",
                 left: "center",
@@ -57,7 +57,7 @@ export default class ChartLine extends React.Component {
             //     right: "5%"
             // },
             xAxis: {
-                type: "category",
+                type: "category"
                 // boundaryGap: false
             },
             yAxis: {
@@ -73,7 +73,12 @@ export default class ChartLine extends React.Component {
                 left: "center",
                 bottom: "bottom"
             }
-        });
+        };
+        
+        this.echart = Echarts.init(this.refs.container);
+        this.echart.setOption(option);
+        
+        setInterval(()=>{Axios.get("getChartData").then((res)=>)},1000)
     }
 
     render() {
