@@ -2,7 +2,7 @@
     height: 40px;
     background-color: #ecf6fd;
 
-    display: flex;
+    /*display: flex;*/
 }
 
 .header-text {
@@ -10,12 +10,13 @@
     line-height: 40px;
 
     margin: 0px 0px 0px 10px;
+    float: left;
 }
 
 .header-user {
     font-size: 15px;
     line-height: 40px;
 
-    margin-left: auto;
     margin-right: 10px;
+    float: right;
 }

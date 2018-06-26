@@ -6,6 +6,8 @@
     flex: 1;
 
     height: 100vh;
+    min-width: 150px;
+    overflow-y: auto;
     border-right: 1px solid lightgrey;
 
     display: flex;
@@ -16,7 +18,8 @@
     flex: 3;
 
     height: 100vh;
-    overflow-y: scroll;
+    min-width: 500px;
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
