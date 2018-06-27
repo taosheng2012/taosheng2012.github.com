@@ -1,6 +1,6 @@
 import React from "react";
 
-import Axios from "axios"
+import Axios from "axios";
 
 import Echarts from "echarts/lib/echarts";
 
@@ -14,31 +14,28 @@ import "echarts/lib/component/legend";
 
 const series_data = [
     {
-        name: "销售额/百万",
+        name: "销售额",
         type: "bar",
         barWidth: "50%",
         data: [
-            ["Jan", 20],
-            ["Feb", 10],
-            ["Mar", 20],
-            ["Apr", 40],
-            ["May", 30],
-            ["Jun", 50],
-            ["Jul", 60]
+            ["Jan", 60],
+            ["Mar", 65],
+            ["May", 66],
+            ["Jul", 70],
+            ["Sep", 65],
+            ["Nov", 75]
         ]
     },
     {
-        name: "利润/百万",
+        name: "利润",
         type: "line",
-        // barWidth: "50%",
         data: [
-            ["Jan", 15],
-            ["Feb", 8],
-            ["Mar", 12],
-            ["Apr", 22],
-            ["May", 18],
-            ["Jun", 32],
-            ["Jul", 44]
+            ["Jan", 18],
+            ["Mar", 19],
+            ["May", 21],
+            ["Jul", 20],
+            ["Sep", 18],
+            ["Nov", 23]
         ]
     }
 ];
@@ -47,7 +44,7 @@ export default class ChartLine extends React.Component {
     componentDidMount() {
         const option = {
             title: {
-                text: "月度销售数据汇总（2018年）",
+                text: "月度销售数据汇总",
                 left: "center",
                 top: "2%"
             },
@@ -57,33 +54,43 @@ export default class ChartLine extends React.Component {
             //     right: "5%"
             // },
             xAxis: {
+                name: "Month",
                 type: "category"
                 // boundaryGap: false
             },
             yAxis: {
+                name: "Million(RMB)",
                 type: "value"
             },
             series: series_data,
-
+            
             tooltip: {
                 trigger: "axis"
             },
             legend: {
-                // data: ["意向", "成交"],
                 left: "center",
                 bottom: "bottom"
             }
         };
-        
+
         this.echart = Echarts.init(this.refs.container);
         this.echart.setOption(option);
-        
-        setInterval(()=>{Axios.get("getChartData").then((res)=>)},1000)
+
+        setInterval(
+            () =>
+                Axios.post("getChartData", {
+                    data: {
+                        series: option.series
+                    }
+                }).then(res => {
+                    option.series = res.data;
+                    this.echart.setOption(option);
+                }),
+            3000
+        );
     }
 
     render() {
-        return (
-            <div ref="container" style={{ width: "100%", height: "380px" }} />
-        );
+        return <div ref="container" style={{ height: "380px" }} />;
     }
 }
