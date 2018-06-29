@@ -19,11 +19,11 @@ const series_data = [
         barWidth: "50%",
         data: [
             ["Jan", 60],
-            ["Mar", 65],
-            ["May", 66],
-            ["Jul", 70],
-            ["Sep", 65],
-            ["Nov", 75]
+            ["Feb", 65],
+            ["Mar", 66],
+            ["Apr", 70],
+            ["May", 65],
+            ["Jun", 75]
         ]
     },
     {
@@ -31,11 +31,11 @@ const series_data = [
         type: "line",
         data: [
             ["Jan", 18],
-            ["Mar", 19],
-            ["May", 21],
-            ["Jul", 20],
-            ["Sep", 18],
-            ["Nov", 23]
+            ["Feb", 19],
+            ["Mar", 21],
+            ["Apr", 20],
+            ["May", 18],
+            ["Jun", 23]
         ]
     }
 ];

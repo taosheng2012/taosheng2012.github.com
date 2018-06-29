@@ -13,37 +13,41 @@ Mock.mock("getTableData", {
 });
 
 Mock.mock("getChartData", options => {
+    const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+    ];
+
     const body = JSON.parse(options.body);
 
-    const data_sales = body.data.series[0].data.shift();
-    data_sales[1] = Math.ceil(Math.random() * (100 - 60) + 60);
-    body.data.series[0].data.push(data_sales);
+    const data_sales = body.data.series[0].data;
+    const data_profit = body.data.series[1].data;
 
-    const data_interest = body.data.series[1].data.shift();
-    data_interest[1] = Math.floor(
-        data_sales[1] * Math.round(Math.random() * (50 - 20) + 20) / 100
-    );
-    body.data.series[1].data.push(data_interest);
+    let i = months.indexOf(data_sales[data_sales.length - 1][0]);
+    if (++i >= months.length) i = 0;
+    data_sales.push([months[i], Math.ceil(Math.random() * (100 - 60) + 60)]);
+    data_sales.shift();
+
+    data_profit.push([
+        months[i],
+        Math.floor(
+            data_sales[data_sales.length - 1][1] *
+                (Math.random() * (50 - 20) + 20) /
+                100
+        )
+    ]);
+
+    data_profit.shift();
 
     return body.data.series;
-
-    // "date|+1": ["Jan", "Mar", "May", "Jul","Sep","Nov"],
-
-    // sales(){
-
-    //     [
-    //     ["Jan", "@integer(10,100)"],
-    //     ["Jan", "@integer(10,100)"],
-    //     ["Jan", "@integer(10,100)"],
-    //     ["Jan", "@integer(10,100)"],
-    //     ["Jan", "@integer(10,100)"],
-    //     ["Jan", "@integer(10,100)"],
-
-    // ]
-    // }
-
-    // ,
-    // interest: {
-
-    // }
 });
