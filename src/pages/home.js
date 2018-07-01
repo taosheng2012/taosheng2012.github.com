@@ -1,63 +1,40 @@
 import React from "react";
 
-import { Card, Row, Col } from "antd";
+import { Card, Rate, Row, Col } from "antd";
 import "antd/dist/antd.css";
-
-import "./home.css";
 
 import Chart from "../components/chart.js";
 
-const style_card = {
-    backgroundColor: "#ecf6fd"
-};
+import "./home.css";
 
 export default class Home extends React.Component {
     render() {
         return (
             <div className="home">
                 <Card title="竞品影响力指数">
-                    <Row gutter={16}>
-                        <Col span="6">
+                    <div style={{ display: "flex" ,flexWrap: "wrap"}}>
+                        {[
+                            ["React.js", 5],
+                            ["Vue.js", 4],
+                            ["Angular.js", 3],
+                            ["jQuery", 3]
+                        ].map((item, index) => (
                             <Card
-                                title="React.js"
+                                title={item[0]}
                                 bordered={false}
-                                hoverable="true"
-                                bodyStyle={style_card}
+                                hoverable={true}
+                                bodyStyle={{
+                                    backgroundColor: "#ecf6fd"
+                                }}
+                                style={{
+                                    width: "200px",
+                                    margin: "0px 10px",
+                                }}
                             >
-                                <span style={{ color: "red" }}>☆ ☆ ☆ ☆ ☆</span>
+                                <Rate value={item[1]} />
                             </Card>
-                        </Col>
-                        <Col span="6">
-                            <Card
-                                title="Vue.js"
-                                bordered={false}
-                                hoverable="true"
-                                bodyStyle={style_card}
-                            >
-                                <span style={{ color: "red" }}>☆ ☆ ☆ ☆</span> ☆
-                            </Card>
-                        </Col>
-                        <Col span="6">
-                            <Card
-                                title="Angular.js"
-                                bordered={false}
-                                hoverable="true"
-                                bodyStyle={style_card}
-                            >
-                                <span style={{ color: "red" }}>☆ ☆ ☆</span> ☆ ☆
-                            </Card>
-                        </Col>
-                        <Col span="6">
-                            <Card
-                                title="jQuery"
-                                bordered={false}
-                                hoverable="true"
-                                bodyStyle={style_card}
-                            >
-                                <span style={{ color: "red" }}>☆ ☆ ☆</span> ☆ ☆
-                            </Card>
-                        </Col>
-                    </Row>
+                        ))}
+                    </div>
                 </Card>
 
                 <Chart />
