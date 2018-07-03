@@ -34,7 +34,7 @@ function styleAppLeft() {
         backgroundColor: "white",
 
         height: "100vh",
-        width: "300px",
+        width: "200px",
         overflowY: "auto",
         borderRight: "1px solid lightgrey",
 
@@ -88,7 +88,7 @@ class AppLeft extends React.Component {
                     onClick={this.props.handleClickEnd}
                     style={{
                         backgroundColor: "lightgrey",
-                        opacity: "0.3",
+                        opacity: "0.5",
                         position: "fixed",
                         top: 0,
                         left: 0,
@@ -111,10 +111,15 @@ class App extends React.Component {
     constructor() {
         super();
 
-        this.state = { show: isMobile ? false : true };
+        this.state = { show: !isMobile };
 
         this.handleClickStart = this.handleClickStart.bind(this);
         this.handleClickEnd = this.handleClickEnd.bind(this);
+
+        window.addEventListener("resize", () => {
+            isMobile = window.innerHeight > window.innerWidth ? true : false;
+            this.setState({ show: !isMobile });
+        });
     }
 
     handleClickStart() {
