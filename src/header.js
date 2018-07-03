@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Menu, Dropdown, Icon } from "antd";
+import { Menu, Dropdown, Icon, Button } from "antd";
 
 const menu = (
     <Menu>
@@ -19,6 +19,13 @@ const menu = (
 
 export default class Header extends React.Component {
     render() {
+        const isMobile = window.innerHeight > window.innerWidth ? true : false;
+
+        let text =
+            window.location.pathname.slice(1, 2).toUpperCase() +
+            window.location.pathname.slice(2);
+        text = text ? text : "Home";
+
         return (
             <div
                 style={{
@@ -26,6 +33,30 @@ export default class Header extends React.Component {
                     backgroundColor: "#ecf6fd"
                 }}
             >
+                {isMobile ? (
+                    <Button
+                        onClick={this.props.handleClickStart}
+                        style={{
+                            backgroundColor: "#ecf6fd",
+                            // border: "none",
+                            display: "block",
+                            float: "left",
+                            marginTop: "3px",
+                            marginLeft: "2%",
+                            marginRight: "30px",
+                            width: "60px",
+                            height: "34px"
+                        }}
+                    >
+                        <Icon
+                            type="menu-unfold"
+                            style={{ backgroundColor: "dark" }}
+                        />
+                    </Button>
+                ) : (
+                    ""
+                )}
+
                 <span
                     id="header-text"
                     style={{
@@ -35,8 +66,7 @@ export default class Header extends React.Component {
                         float: "left"
                     }}
                 >
-                    {this.props.location.pathname.slice(1, 2).toUpperCase() +
-                        this.props.location.pathname.slice(2)}
+                    {text}
                 </span>
 
                 <div

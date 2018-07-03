@@ -21,7 +21,7 @@ export default class About extends React.Component {
                 <table style={{ margin: "0px auto" }}>
                     <thead>
                         <tr>
-                            <th colspan="2" style={data_style}>
+                            <th colSpan="2" style={data_style}>
                                 <Icon type="idcard" /> 和我联系
                                 <Divider />
                             </th>
@@ -64,7 +64,7 @@ export default class About extends React.Component {
                             <td style={data_style}>yult123@qq.com</td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <td colSpan="2">
                                 <Divider />
                             </td>
                         </tr>

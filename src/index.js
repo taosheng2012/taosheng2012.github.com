@@ -10,54 +10,145 @@ import Footer from "./footer";
 
 import Home from "./pages/home";
 import Employees from "./pages/employees";
-import About from "./pages/about"
+import About from "./pages/about";
 import NotFound from "./pages/not-found";
 
-ReactDOM.render(
-    <BrowserRouter>
-        <div id="app" style={{ display: "flex" }}>
-            <div
-                id="app-left"
-                style={{
-                    flex: 1,
+let isMobile = window.innerHeight > window.innerWidth ? true : false;
 
-                    height: "100vh",
-                    minWidth: "150px",
-                    overflowY: "auto",
-                    borderRight: "1px solid lightgrey",
+function styleApp() {
+    const style_mobile = {};
+    const style_pc = {
+        display: "flex"
+    };
 
-                    display: "flex",
-                    flexDirection: "column"
-                }}
-            >
+    return isMobile ? style_mobile : style_pc;
+}
+
+function styleAppLeft() {
+    const style_mobile = {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        zIndex: 11,
+
+        backgroundColor: "white",
+
+        height: "100vh",
+        width: "300px",
+        overflowY: "auto",
+        borderRight: "1px solid lightgrey",
+
+        display: "flex",
+        flexDirection: "column"
+    };
+
+    const style_pc = {
+        flex: 1,
+
+        height: "100vh",
+        minWidth: "150px",
+        overflowY: "auto",
+        borderRight: "1px solid lightgrey",
+
+        display: "flex",
+        flexDirection: "column"
+    };
+
+    return isMobile ? style_mobile : style_pc;
+}
+
+function styleAppRight() {
+    const style_mobile = {};
+    const style_pc = {
+        flex: 3,
+
+        height: "100vh",
+        /*min-width: 300px,*/
+        overflowY: "auto",
+
+        display: "flex",
+        flexDirection: "column"
+    };
+
+    return isMobile ? style_mobile : style_pc;
+}
+
+class AppLeft extends React.Component {
+    render() {
+        if (!this.props.show) return "";
+
+        return isMobile ? (
+            <div>
+                <div id="app-left" style={styleAppLeft()}>
+                    <Nav />
+                    <Footer />
+                </div>
+
+                <div
+                    onClick={this.props.handleClickEnd}
+                    style={{
+                        backgroundColor: "lightgrey",
+                        opacity: "0.3",
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        width: "100vw",
+                        height: "100vh",
+                        zIndex: 10
+                    }}
+                />
+            </div>
+        ) : (
+            <div id="app-left" style={styleAppLeft()}>
                 <Nav />
                 <Footer />
             </div>
+        );
+    }
+}
 
-            <div
-                id="app-right"
-                style={{
-                    flex: 3,
+class App extends React.Component {
+    constructor() {
+        super();
 
-                    height: "100vh",
-                    /*min-width: 300px,*/
-                    overflowY: "auto",
+        this.state = { show: isMobile ? false : true };
 
-                    display: "flex",
-                    flexDirection: "column"
-                }}
-            >
-                <Route component={Header} />
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/home" component={Home} />
-                    <Route path="/employees" component={Employees} />
-                    <Route path="/about" component={About} />
+        this.handleClickStart = this.handleClickStart.bind(this);
+        this.handleClickEnd = this.handleClickEnd.bind(this);
+    }
 
-                    <Route component={NotFound} />
-                </Switch>
-            </div>
-        </div>
-    </BrowserRouter>,
-    document.getElementById("root")
-);
+    handleClickStart() {
+        this.setState({ show: true });
+    }
+
+    handleClickEnd() {
+        this.setState({ show: false });
+    }
+
+    render() {
+        return (
+            <BrowserRouter>
+                <div id="app" style={styleApp()}>
+                    <AppLeft
+                        handleClickEnd={this.handleClickEnd}
+                        show={this.state.show}
+                    />
+
+                    <div id="app-right" style={styleAppRight()}>
+                        <Header handleClickStart={this.handleClickStart} />
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/home" component={Home} />
+                            <Route path="/employees" component={Employees} />
+                            <Route path="/about" component={About} />
+
+                            <Route component={NotFound} />
+                        </Switch>
+                    </div>
+                </div>
+            </BrowserRouter>
+        );
+    }
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
