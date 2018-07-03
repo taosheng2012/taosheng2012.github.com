@@ -4,8 +4,6 @@ import { Table } from "antd";
 
 import axios from "axios";
 
-import "./employees.css";
-
 const index_title = [
     ["name", "Name"],
     ["gender", "Gender"],
@@ -28,16 +26,17 @@ export default class Employees extends React.Component {
             dataSource: []
         };
     }
+
     componentDidMount() {
         axios.get("getTableData").then(res => {
             this.setState({ dataSource: res.data.dataSource });
-            console.log(res)
+            console.log(res);
         });
     }
 
     render() {
         return (
-            <div className="employees">
+            <div style={{ padding: "2%" }}>
                 <Table
                     dataSource={this.state.dataSource}
                     columns={columns}

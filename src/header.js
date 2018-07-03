@@ -1,18 +1,18 @@
 import React from "react";
-import { Menu, Dropdown, Icon } from "antd";
+import { Link } from "react-router-dom";
 
-import "./header.css";
+import { Menu, Dropdown, Icon } from "antd";
 
 const menu = (
     <Menu>
         <Menu.Item>
-            <a href="/user">My Profile</a>
+            <Link to="/user">My Profile</Link>
         </Menu.Item>
         <Menu.Item>
-            <a href="/setting">Settings</a>
+            <Link to="/setting">Settings</Link>
         </Menu.Item>
         <Menu.Item>
-            <a href="/login">Logout</a>
+            <Link to="/logout">Logout</Link>
         </Menu.Item>
     </Menu>
 );
@@ -20,10 +20,34 @@ const menu = (
 export default class Header extends React.Component {
     render() {
         return (
-            <div className="header">
-                <h1 className="header-text">Home</h1>
+            <div
+                style={{
+                    height: "40px",
+                    backgroundColor: "#ecf6fd"
+                }}
+            >
+                <span
+                    id="header-text"
+                    style={{
+                        fontSize: "18px",
+                        lineHeight: "40px",
+                        margin: "0px 0px 0px 10px",
+                        float: "left"
+                    }}
+                >
+                    {this.props.location.pathname.slice(1, 2).toUpperCase() +
+                        this.props.location.pathname.slice(2)}
+                </span>
 
-                <div className="header-user">
+                <div
+                    id="header-user"
+                    style={{
+                        fontSize: "15px",
+                        lineHeight: "40px",
+                        marginRight: "10px",
+                        float: "right"
+                    }}
+                >
                     <Dropdown overlay={menu} placement="bottomRight">
                         <a>
                             <Icon type="user" />

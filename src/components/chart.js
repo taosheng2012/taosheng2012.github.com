@@ -42,20 +42,21 @@ const series_data = [
 
 export default class ChartLine extends React.Component {
     componentDidMount() {
-        const option = {
+        this.option = {
             title: {
                 text: "月度销售数据汇总",
                 left: "center",
                 top: "2%"
             },
-            // grid: {
-            //     top: "15%",
-            //     left: "5%",
-            //     right: "5%"
-            // },
+            grid: {
+                // top: "15%",
+                left: "50",
+                right: "70"
+            },
             xAxis: {
                 name: "Month",
                 type: "category"
+                // nameLocation: "center"
                 // boundaryGap: false
             },
             yAxis: {
@@ -63,7 +64,7 @@ export default class ChartLine extends React.Component {
                 type: "value"
             },
             series: series_data,
-            
+
             tooltip: {
                 trigger: "axis"
             },
@@ -74,23 +75,48 @@ export default class ChartLine extends React.Component {
         };
 
         this.echart = Echarts.init(this.refs.container);
-        this.echart.setOption(option);
+        this.echart.setOption(this.option);
 
-        setInterval(
+        this.idInterval = setInterval(
             () =>
                 Axios.post("getChartData", {
                     data: {
-                        series: option.series
+                        series: this.option.series
                     }
                 }).then(res => {
-                    option.series = res.data;
-                    this.echart.setOption(option);
+                    this.option.series = res.data;
+                    this.echart.setOption(this.option);
                 }),
             3000
         );
+
+        this.handleResize = () => {
+            this.echart.dispose();
+
+            this.echart = Echarts.init(this.refs.container);
+            this.echart.setOption(this.option);
+        };
+
+        window.addEventListener("resize", this.handleResize);
+    }
+
+    componentWillUnmount() {
+        this.echart.dispose();
+
+        clearInterval(this.idInterval);
+        window.removeEventListener("resize", this.handleResize);
     }
 
     render() {
-        return <div ref="container" style={{ height: "380px" }} />;
+        return (
+            <div
+                ref="container"
+                style={{
+                    height: "380px",
+                    border: "1px solid lightgrey",
+                    marginTop: "20px"
+                }}
+            />
+        );
     }
 }

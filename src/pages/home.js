@@ -1,18 +1,16 @@
 import React from "react";
 
-import { Card, Rate, Row, Col } from "antd";
+import { Card, Rate } from "antd";
 import "antd/dist/antd.css";
 
 import Chart from "../components/chart.js";
 
-import "./home.css";
-
 export default class Home extends React.Component {
     render() {
         return (
-            <div className="home">
-                <Card title="竞品影响力指数">
-                    <div style={{ display: "flex" ,flexWrap: "wrap"}}>
+            <div style={{ padding: "2%" }}>
+                <Card title="前端框架影响力指数" >
+                    <div style={{ display: "flex", flexWrap: "wrap" ,justifyContent: "space-evenly"}}>
                         {[
                             ["React.js", 5],
                             ["Vue.js", 4],
@@ -20,15 +18,15 @@ export default class Home extends React.Component {
                             ["jQuery", 3]
                         ].map((item, index) => (
                             <Card
+                                key={index}
                                 title={item[0]}
-                                bordered={false}
+                                // bordered={false}
                                 hoverable={true}
                                 bodyStyle={{
                                     backgroundColor: "#ecf6fd"
                                 }}
                                 style={{
-                                    width: "200px",
-                                    margin: "0px 10px",
+                                    margin: "10px 10px"
                                 }}
                             >
                                 <Rate value={item[1]} />
